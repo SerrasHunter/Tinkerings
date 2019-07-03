@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile>
+  <Name>Iridescent Cocoons</Name>
+  <KillRadius>50</KillRadius>
+  <Order>
+    <WaitTimer WaitTime="3" />
+    <If Condition="not IsOnMap(816)">
+      <LogMessage Message="Teleporting to Il Mheg" />
+      <TeleportTo AetheryteId="144" Name="Il Mheg" />
+    </If>
+    <ExGather while="True" DiscoverUnknowns="True" CordialType="HiCordial" CordialTime="Auto">
+      <GatherObject>Lush Vegetation Patch</GatherObject>
+      <HotSpots>
+        <HotSpot XYZ="-509.0428, 38.83679, 134.3568" Radius="300" />
+        <HotSpot XYZ="-366.6671, 1.479906, 63.45868" Radius="300" />
+        <HotSpot XYZ="-492.2209, 5.417903, -57.82955" Radius="300" />
+      </HotSpots>
+      <ItemNames>
+        <ItemName>Iridescent Cocoon</ItemName>
+      </ItemNames>
+      <GatheringSkillOrder>
+      	<GatheringSkill SpellName="Pick Clean" TimesToCast="1" />
+      </GatheringSkillOrder>
+    </ExGather>
+  </Order>
+  <CodeChunks>
+  </CodeChunks>
+</Profile>
