@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile>
+  <Name>Pixie Floss Boll</Name>
+  <KillRadius>50</KillRadius>
+  <Order>
+    <LogMessage Message="Changing gear to set: 3 (Botanist)" />
+    <WaitTimer WaitTime="3" />
+    <If Condition="not IsOnMap(817)">
+      <LogMessage Message="Teleporting to Tika Masala" />
+      <TeleportTo AetheryteId="142" Name="Slitherbough" />
+    </If>
+    <RunCode Name="GearSetChange"/>
+    <RunCode Name="DisableMount"/>
+    <RunCode Name="UseStealth"/>
+    <ExGather while="True" DiscoverUnknowns="True" CordialType="HiCordial" CordialTime="Auto">
+      <GatherObject>Lush Vegetation Patch</GatherObject>
+      <HotSpots>
+        <HotSpot XYZ="-281.4222, 18.87324, 205.3472" Radius="300" />
+        <HotSpot XYZ="-432.1393, 10.80065, 258.2074" Radius="300" />
+        <HotSpot XYZ="-266.8557, 2.190999, 374.6747" Radius="300" />
+      </HotSpots>
+      <ItemNames>
+        <ItemName>Pixie Floss Boll</ItemName>
+      </ItemNames>
+      <GatheringSkillOrder>
+      	<GatheringSkill SpellName="Pick Clean" TimesToCast="1" />
+      </GatheringSkillOrder>
+    </ExGather>
+  </Order>
+  <CodeChunks>
+    <CodeChunk Name="UseStealth">
+    <![CDATA[
+                        if(Core.Player.IsMounted)
+      {
+        ff14bot.Managers.ActionManager.Dismount();
+        await Buddy.Coroutines.Coroutine.Sleep(1500);
+      }   
+      SpellData data;
+      if (!Core.Me.HasAura("Stealth") && ActionManager.CurrentActions.TryGetValue("Stealth", out data) && ActionManager.CanCast(data, Core.Me))
+      {
+        ActionManager.DoAction("Stealth", Core.Me);
+        await Buddy.Coroutines.Coroutine.Sleep(500);
+      }
+    ]]>
+  </CodeChunk>
+  <CodeChunk Name="DisableMount">
+    <![CDATA[
+      ff14bot.Settings.CharacterSettings.Instance.UseMount = false;
+      await Buddy.Coroutines.Coroutine.Sleep(500);
+    ]]>
+  </CodeChunk>
+    <CodeChunk Name="GearSetChange"><![CDATA[ff14bot.Managers.ChatManager.SendChat("/gs change 3");]]></CodeChunk>
+  </CodeChunks>
+</Profile>
